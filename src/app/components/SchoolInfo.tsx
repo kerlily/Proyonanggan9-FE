@@ -1,0 +1,48 @@
+import Image from "next/image";
+
+export default function SchoolInfo() {
+  return (
+    <section className="container max-w-6xl mx-auto px-4 py-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        
+        {/* Gambar Sekolah */}
+        <div className="w-full">
+          <div className="relative w-full aspect-video">
+            <Image
+              src="https://picsum.photos/id/1018/600/400" // ganti dengan gambar sekolah di public
+              alt="SD Negeri Proyonanggan 09"
+              fill
+              className="rounded-lg shadow-lg object-cover"
+            />
+          </div>
+        </div>
+
+        {/* Teks Penjelasan */}
+        <div className="w-full">
+          <h1 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            SD Negeri Proyonanggan 09
+            <span className="border-b-4 border-yellow-400 w-8 inline-block align-bottom"></span>
+          </h1>
+
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 md:p-6 text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed">
+            <p className="mb-4">
+              SD Negeri Proyonanggan 09 Batang adalah salah satu sekolah dasar negeri
+              yang berlokasi di Jl. Ki Mangun Sarkoro No. 4, Kelurahan Proyonanggan
+              Selatan, Kabupaten Batang, Jawa Tengah. Sekolah ini berkomitmen untuk
+              mencetak generasi yang berkarakter, berprestasi, dan peduli lingkungan
+              melalui kegiatan belajar mengajar yang berkualitas, disiplin, dan
+              menyenangkan.
+            </p>
+            <p>
+              Dengan dukungan tenaga pendidik yang berkompeten serta fasilitas yang
+              memadai, SD Negeri Proyonanggan 09 terus berupaya menciptakan
+              lingkungan belajar yang aman, nyaman, dan kondusif. Selain pembelajaran
+              akademik, sekolah juga mendorong siswa untuk mengembangkan potensi di
+              bidang seni, olahraga, dan kegiatan ekstrakurikuler.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

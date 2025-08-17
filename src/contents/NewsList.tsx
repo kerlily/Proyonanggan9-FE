@@ -1,0 +1,72 @@
+// contents/berita.ts
+export const beritaDummy = [
+  {
+    id: "1",
+    title: "Upacara Bendera Memperingati Hari Kemerdekaan",
+    excerpt: "Sekolah mengadakan upacara untuk memperingati Hari Kemerdekaan Indonesia ke-79 loremipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua loremipsum dolor sit amet.",
+    imageUrl: "https://picsum.photos/id/1015/600/400",
+    date: "17 Agustus 2025",
+  },
+  {
+    id: "2",
+    title: "Lomba Cerdas Cermat Tingkat Kabupaten",
+    excerpt: "Tim SD Negeri Proyonanggan 09 berhasil meraih juara 1 lomba cerdas cermat...",
+    imageUrl: "https://picsum.photos/id/1025/600/400",
+    date: "10 Agustus 2025",
+  },
+  {
+    id: "3",
+    title: "Penanaman Pohon di Lingkungan Sekolah",
+    excerpt: "Siswa-siswi ikut berpartisipasi dalam kegiatan penanaman pohon untuk menjaga lingkungan...",
+    imageUrl: "https://picsum.photos/id/1035/600/400",
+    date: "5 Agustus 2025",
+  },
+  {
+    id: "4",
+    title: "Penanaman Pohon di Lingkungan Sekolah",
+    excerpt: "Siswa-siswi ikut berpartisipasi dalam kegiatan penanaman pohon untuk menjaga lingkungan...",
+    imageUrl: "https://picsum.photos/id/1035/600/400",
+    date: "5 Agustus 2025",
+  },
+  {
+    id: "5",
+    title: "Penanaman Pohon di Lingkungan Sekolah",
+    excerpt: "Siswa-siswi ikut berpartisipasi dalam kegiatan penanaman pohon untuk menjaga lingkungan...",
+    imageUrl: "https://picsum.photos/id/1035/600/400",
+    date: "5 Agustus 2025",
+  },
+  {
+    id: "6",
+    title: "Penanaman Pohon di Lingkungan Sekolah",
+    excerpt: "Siswa-siswi ikut berpartisipasi dalam kegiatan penanaman pohon untuk menjaga lingkungan...",
+    imageUrl: "https://picsum.photos/id/1035/600/400",
+    date: "5 Agustus 2025",
+  },{
+    id: "7",
+    title: "Penanaman Pohon di Lingkungan Sekolah",
+    excerpt: "Siswa-siswi ikut berpartisipasi dalam kegiatan penanaman pohon untuk menjaga lingkungan...",
+    imageUrl: "https://picsum.photos/id/1035/600/400",
+    date: "5 Agustus 2025",
+  },
+  {
+    id: "8",
+    title: "Penanaman Pohon di Lingkungan Sekolah",
+    excerpt: "Siswa-siswi ikut berpartisipasi dalam kegiatan penanaman pohon untuk menjaga lingkungan...",
+    imageUrl: "https://picsum.photos/id/1035/600/400",
+    date: "5 Agustus 2025",
+  },
+  {
+    id: "9",
+    title: "Penanaman Pohon di Lingkungan Sekolah",
+    excerpt: "Siswa-siswi ikut berpartisipasi dalam kegiatan penanaman pohon untuk menjaga lingkungan...",
+    imageUrl: "https://picsum.photos/id/1035/600/400",
+    date: "5 Agustus 2025",
+  },
+  {
+    id: "10",
+    title: "Penanaman Pohon di Lingkungan Sekolah",
+    excerpt: "Siswa-siswi ikut berpartisipasi dalam kegiatan penanaman pohon untuk menjaga lingkungan...",
+    imageUrl: "https://picsum.photos/id/1035/600/400",
+    date: "5 Agustus 2025",
+  },
+];

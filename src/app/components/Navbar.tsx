@@ -37,15 +37,17 @@ const Navbar = () => {
   ];
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (
-        profileRef.current &&
-        !profileRef.current.contains(e.target as Node)
-      ) {
-        setIsProfileOpen(false);
-      }
+      const target = e.target as Node;
+      // if click inside desktop profile menu, ignore
+      if (profileRef.current && profileRef.current.contains(target)) return;
+      // if click inside mobile menu, ignore
+      if (mobileMenuRef.current && mobileMenuRef.current.contains(target)) return;
+      // otherwise close profile submenu
+      setIsProfileOpen(false);
     }
 
     function handleKeyDown(e: KeyboardEvent) {
@@ -175,14 +177,14 @@ const Navbar = () => {
 
         {/* mobile menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden ">
+          <div ref={mobileMenuRef} className="md:hidden ">
             <div className="py-4 space-y-4">
               {menuItems.map((item, index) => {
                 if (item.name === "Profile") {
                   return (
                     <div key={index}>
                       <button
-                        onClick={() => setIsProfileOpen(!isProfileOpen)}
+                        onClick={() => setIsProfileOpen((s) => !s)}
                         className="w-full text-left py-2 hover:text-primary transition-colors font-medium duration-300 flex items-center justify-between px-4"
                       >
                         <span className="flex items-center gap-2">

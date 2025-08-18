@@ -2,7 +2,7 @@
 import GuruCard from "@/app/components/GuruCard";
 import { guruList } from "@/contents/guru";
 import { motion } from "framer-motion";
-import { slideInLeft, fadeInUp, staggerContainer } from "@/app/utils/animations";
+import { slideInLeft, fadeInUp, staggerContainer, cardHover } from "@/app/utils/animations";
 
 export default function GuruPage() {
   return (
@@ -17,9 +17,15 @@ export default function GuruPage() {
         initial="initial"
         animate="animate"
         className="grid gap-6  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        
       >
         {guruList.map((guru, idx) => (
-          <motion.div key={guru.id} variants={fadeInUp} custom={idx}>
+          <motion.div
+            whileHover={cardHover.whileHover}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+            style={{ zIndex: 10, transformOrigin: 'center' }}
+           key={guru.id} variants={fadeInUp} custom={idx}>
             <GuruCard
               key={guru.id}
               nama={guru.nama}

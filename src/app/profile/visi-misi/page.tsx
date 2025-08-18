@@ -1,15 +1,30 @@
+'use client';
+
 import Image from "next/image";
+import { motion } from 'framer-motion'
+import {
+  fadeInDown,
+  fadeInLeft,
+  fadeInRight,
+} from '../../utils/animations'
 
 export default function VisiMisi() {
   return (
     <section className="container max-w-6xl mx-auto px-4 py-12">
-      <h2 className="text-3xl md:text-4xl font-bold text-center p-10  text-gray-900 dark:text-white">
+      <motion.h2
+      {...fadeInDown}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      className="text-3xl md:text-4xl font-bold text-center p-10  text-gray-900 dark:text-white">
         Visi & Misi
-      </h2>
+      </motion.h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div
+      className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Visi */}
-        <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <motion.div        
+      {...fadeInLeft}
+      transition={{ duration: 0.5, delay: 0.3 }}
+        className="bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden flex flex-col">
           {/* Gambar */}
           <div className="p-4">
             <div className="relative w-full aspect-square rounded-lg overflow-hidden">
@@ -32,10 +47,14 @@ export default function VisiMisi() {
               berakhlak mulia, serta peduli terhadap lingkungan.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Misi */}
-        <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <motion.div
+        
+      {...fadeInRight}
+      transition={{ duration: 0.5, delay: 0.3 }}
+        className="bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden flex flex-col">
           {/* Gambar */}
           <div className="p-4">
             <div className="relative w-full aspect-square rounded-lg overflow-hidden">
@@ -61,7 +80,7 @@ export default function VisiMisi() {
               <li>Menciptakan lingkungan sekolah yang aman, nyaman, dan kondusif.</li>
             </ul>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

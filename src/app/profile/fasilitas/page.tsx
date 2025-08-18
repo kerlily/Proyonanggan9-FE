@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { fasilitasList } from "@/contents/fasilitas";
 import { motion } from "framer-motion";
-import { slideInLeft, fadeInUp, staggerContainer } from "@/app/utils/animations";
+import { slideInLeft, fadeInUp, staggerContainer, cardHover } from "@/app/utils/animations";
 
 export default function FasilitasPage() {
   return (
@@ -24,9 +24,11 @@ export default function FasilitasPage() {
             key={fasilitas.id}
             variants={fadeInUp}
             custom={idx}
+            whileHover={cardHover.whileHover}
+            transition={{ type: "spring", stiffness: 300 }}
             className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+            style={{ zIndex: 10, transformOrigin: 'center' }}
           >
-            {/* Ganti aspect jadi 16:9 */}
             <div className="relative w-full aspect-video">
               <Image
                 src={fasilitas.imageUrl}

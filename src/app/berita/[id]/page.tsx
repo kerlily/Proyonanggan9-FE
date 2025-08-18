@@ -1,8 +1,10 @@
 import { beritaDummy } from "../../../contents/NewsList";
 import Image from "next/image";
 
-export default async function BeritaDetail({ params }: { params: { id: string } }) {
-  const { id } = await params;
+export default async function BeritaDetail({ params }: { params?: Promise<Record<string, string | string[] | undefined>> | undefined }) {
+  // Await params (Next's generated PageProps expects params to be Promise-wrapped)
+  const resolvedParams = await params;
+  const id = resolvedParams && typeof resolvedParams.id === 'string' ? resolvedParams.id : undefined;
   const berita = beritaDummy.find((item) => item.id === id);
 
   if (!berita) return <div className="container max-w-3xl mx-auto px-4 py-12">Berita tidak ditemukan.</div>;

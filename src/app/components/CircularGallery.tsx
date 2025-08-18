@@ -480,51 +480,35 @@ class App {
     const defaultItems = [
       {
         image: `https://picsum.photos/seed/1/800/600?grayscale`,
-        text: "Bridge",
+        text: "Ruang Kelas",
       },
       {
         image: `https://picsum.photos/seed/2/800/600?grayscale`,
-        text: "Desk Setup",
+        text: "Ruang Kepala Sekolah",
       },
       {
         image: `https://picsum.photos/seed/3/800/600?grayscale`,
-        text: "Waterfall",
+        text: "Ruang Guru",
       },
       {
         image: `https://picsum.photos/seed/4/800/600?grayscale`,
-        text: "Strawberries",
+        text: "Perpustakaan",
       },
       {
         image: `https://picsum.photos/seed/5/800/600?grayscale`,
-        text: "Deep Diving",
-      },
+        text: "UKS",
+      },  
       {
         image: `https://picsum.photos/seed/16/800/600?grayscale`,
-        text: "Train Track",
+        text: "Kamar Mandi",
       },
       {
         image: `https://picsum.photos/seed/17/800/600?grayscale`,
-        text: "Santorini",
+        text: "Gudang",
       },
       {
         image: `https://picsum.photos/seed/8/800/600?grayscale`,
-        text: "Blurry Lights",
-      },
-      {
-        image: `https://picsum.photos/seed/9/800/600?grayscale`,
-        text: "New York",
-      },
-      {
-        image: `https://picsum.photos/seed/10/800/600?grayscale`,
-        text: "Good Boy",
-      },
-      {
-        image: `https://picsum.photos/seed/21/800/600?grayscale`,
-        text: "Coastline",
-      },
-      {
-        image: `https://picsum.photos/seed/12/800/600?grayscale`,
-        text: "Palm Trees",
+        text: "Lapangan",
       },
     ];
     const galleryItems = items && items.length ? items : defaultItems;
@@ -660,10 +644,10 @@ export default function CircularGallery({
   bend = 3,
   textColor = "#ffffff",
   borderRadius = 0.05,
-  font = "bold 30px Figtree",
+  font = "bold 30px 'Inter', sans-serif",
   scrollSpeed = 2,
   scrollEase = 0.05,
-  
+
 }: CircularGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {

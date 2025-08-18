@@ -3,12 +3,14 @@
 import React from 'react'
 
 import { motion } from 'framer-motion'
-import { fadeInUp,fadeIn } from '../utils/animations'
+import { fadeIn } from '../utils/animations'
 import HeroSlide from "./HeroSlide"
 import NewsCarousel from './NewsCarousel'
 import { beritaDummy } from '../../contents/NewsList'
 import { slideInLeft } from '../utils/animations'
-import LazyLoadOnScroll from './LazyLoadOnScroll'
+// import LazyLoadOnScroll from './LazyLoadOnScroll'
+import SchoolInfoLoader from './SchoolInfoLoader'
+import CircularGallery from './CircularGallery'
 
 
 
@@ -43,10 +45,11 @@ const Hero = () => {
 
   {/* Konten Hero */}
   <motion.div 
-        {...fadeInUp}
+        {...slideInLeft}
         transition={{ duration: 0.5, delay: 1.2 }}
       >
-  <LazyLoadOnScroll loader={() => import('./SchoolInfo')} />
+  {/* <LazyLoadOnScroll loader={() => import('./SchoolInfo')} /> */}
+      <SchoolInfoLoader />
       </motion.div>
  
 
@@ -57,8 +60,14 @@ const Hero = () => {
         className="absolute top-0 left-0 w-full h-full overflow-hidden"
         style={{ height: '600px', position: 'relative' }}
       >
-      <LazyLoadOnScroll
+      {/* <LazyLoadOnScroll
         loader={() => import('./CircularGallery')}
+        bend={0}
+        textColor="#0077B6"
+        borderRadius={0.05}
+        scrollEase={0.02}
+      /> */}
+      <CircularGallery 
         bend={0}
         textColor="#0077B6"
         borderRadius={0.05}

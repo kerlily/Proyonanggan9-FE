@@ -1,7 +1,6 @@
 export const fadeInUp = {
   initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 }
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 }
 
 export const fadeInDown = {
@@ -17,9 +16,11 @@ export const fadeIn = {
 }
 
 export const staggerContainer = {
+  initial: {},
   animate: {
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
     }
   }
 }

@@ -1,8 +1,9 @@
 import { beritaDummy } from "../../../contents/NewsList";
 import Image from "next/image";
 
-export default function BeritaDetail({ params }: { params: { id: string } }) {
-  const berita = beritaDummy.find((item) => item.id === params.id);
+export default async function BeritaDetail({ params }: { params: { id: string } }) {
+  const { id } = await params;
+  const berita = beritaDummy.find((item) => item.id === id);
 
   if (!berita) return <div className="container max-w-3xl mx-auto px-4 py-12">Berita tidak ditemukan.</div>;
 

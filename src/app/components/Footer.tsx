@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 
 
 export default function Footer() {
   return (
-    <footer className="bg-dark  border-t border-gray-200 dark:border-gray-800">
+    <footer className="bg-white dark:bg-dark border-t border-gray-200 dark:border-gray-800">
       <div className="container max-w-7xl mx-auto px-4 py-12">
         {/* Bagian Atas Footer */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -42,10 +42,9 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-primary">Link Cepat</h3>
             <ul className="mt-3 space-y-2 text-secondary text-sm">
               <li><Link href="/" className="hover:text-primary">Beranda</Link></li>
-              <li><Link href="/profil" className="hover:text-primary">Profil Sekolah</Link></li>
+              <li><Link href="https://example.com/login" className="hover:text-primary">LMS</Link></li>
               <li><Link href="/artikel" className="hover:text-primary">Artikel</Link></li>
-              <li><Link href="/lms" className="hover:text-primary">E-Learning</Link></li>
-              <li><Link href="/kontak" className="hover:text-primary">Kontak</Link></li>
+              <li><Link href="/contact" className="hover:text-primary">Kontak</Link></li>
             </ul>
           </div>
 

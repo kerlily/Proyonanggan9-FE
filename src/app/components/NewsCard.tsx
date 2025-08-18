@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { cardHover } from "../utils/animations";
 
 
@@ -10,13 +10,15 @@ interface NewsCardProps {
   excerpt: string;
   imageUrl: string;
   date: string;
+  variants?: Variants;
 }
 
-const NewsCard: React.FC<NewsCardProps> = ({ id, title, excerpt, imageUrl, date }) => {
+const NewsCard: React.FC<NewsCardProps> = ({ id, title, excerpt, imageUrl, date, variants }) => {
   return (
     <motion.div
-      whileHover={cardHover.whileHover}
-      transition={{ type: "spring", stiffness: 300 }}
+  variants={variants}
+  whileHover={cardHover.whileHover}
+  transition={{ type: "spring", stiffness: 300 }}
       className="bg-white dark:bg-dark border border-gray-200 dark:border-gray-700 rounded-lg shadow transition-shadow duration-300 overflow-hidden"
       style={{ zIndex: 10, transformOrigin: 'center' }}
     >

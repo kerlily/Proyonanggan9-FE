@@ -1,0 +1,86 @@
+export const guruList = [
+  {
+    id: 1,
+    nama: "Siti Munawaroh, S.Pd.SD",
+    jabatan: "Kepala Sekolah",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 2,
+    nama: "Sunarsih, S.Pd.SD",
+    jabatan: "Guru Kelas",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 3,
+    nama: "Siti Munfaridah, S.Pd.SD",
+    jabatan: "Guru Kelas",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 4,
+    nama: "Sri Suwarti, S.Pd.SD",
+    jabatan: "Guru Kelas",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 5,
+    nama: "Sri Utami, S.Pd.SD",
+    jabatan: "Guru Kelas",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 6,
+    nama: "Siti Mahmudah, S.Pd.SD",
+    jabatan: "Guru Kelas",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 7,
+    nama: "Siti Aminah, S.Pd.SD",
+    jabatan: "Guru Kelas",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 8,
+    nama: "Nurul Hidayah, S.Pd.SD",
+    jabatan: "Guru Kelas",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 9,
+    nama: "Umi Habibah, S.Pd.I",
+    jabatan: "Guru Pendidikan Agama Islam",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 10,
+    nama: "Siti Fatimah, S.Pd.SD",
+    jabatan: "Guru Kelas",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 11,
+    nama: "Nur Aini, S.Pd",
+    jabatan: "Guru Bahasa Inggris",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 12,
+    nama: "Wahyudi, S.Pd",
+    jabatan: "Guru PJOK",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 13,
+    nama: "Siti Aisyah, S.Pd.SD",
+    jabatan: "Guru Kelas",
+    imageUrl: "/profile.jpg",
+  },
+  {
+    id: 14,
+    nama: "Ninik Mulyani, S.Pd.SD",
+    jabatan: "Guru Kelas",
+    imageUrl: "/profile.jpg",
+  },
+];

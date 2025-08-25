@@ -1,0 +1,5 @@
+# robots.txt for SD Negeri Proyonanggan 09
+# If you deploy to a custom domain, update the Sitemap URL below.
+User-agent: *
+Allow: /
+Sitemap: https://sdnegeriproyonanggan9.vercel.app/sitemap.xml

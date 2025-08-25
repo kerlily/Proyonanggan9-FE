@@ -1,19 +1,21 @@
-import Image from "next/image";
-
 export default function SchoolInfo() {
   return (
     <section className="container max-w-6xl mx-auto px-4 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         
-        {/* Gambar Sekolah */}
+        {/* Gambar / Video Sekolah */}
         <div className="w-full">
           <div className="relative w-full aspect-video">
-            <Image
-              src="https://picsum.photos/id/1018/600/400" // ganti dengan gambar sekolah di public
-              alt="SD Negeri Proyonanggan 09"
-              fill
-              className="rounded-lg shadow-lg object-cover"
-            />
+            {/* <iframe
+  className="absolute inset-0 w-full h-full rounded-lg shadow-lg pointer-events-none"
+  src="https://www.youtube.com/embed/-H3ap6vuoq8?si=Hoo-PnisNgK-5qQb&autoplay=1&mute=1&playsinline=1&controls=0&loop=1&playlist=-H3ap6vuoq8"
+  title="YouTube video player - SD Negeri Proyonanggan 09"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerPolicy="strict-origin-when-cross- origin"
+  allowFullScreen 
+/> */}
+
           </div>
         </div>
 

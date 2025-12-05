@@ -154,7 +154,7 @@ const Navbar = () => {
             </button>
             {/* Login button (Masuk) - prominent */}
             <a
-              href="https://example.com/login"
+              href="https://lms-proyonanggan9.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="ml-4 inline-flex items-center px-4 py-2 bg-primary text-white font-semibold rounded-lg shadow-md hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-colors"

@@ -7,7 +7,6 @@ import HeroSlide from "./HeroSlide"
 import NewsCarousel from './NewsCarousel'
 import { fetchBeritas, fetchGalleries, transformBeritaForComponent, transformGalleryForComponent } from '@/lib/api'
 import SchoolInfoLoader from './SchoolInfoLoader'
-import CircularGallery from './CircularGallery'
 
 const Hero = () => {
   const [beritaList, setBeritaList] = useState<any[]>([]);
@@ -78,24 +77,7 @@ const Hero = () => {
       >
         <SchoolInfoLoader />
       </motion.div>
- 
-      {/* Circular Gallery */}
-      <motion.div 
-        {...slideInLeft}
-        transition={{ duration: 0.5, delay: 1.2 }}
-        className="absolute top-0 left-0 w-full h-full overflow-hidden"
-        style={{ height: '600px', position: 'relative' }}
-      >
-        {!loading && galleryItems.length > 0 && (
-          <CircularGallery 
-            items={galleryItems}
-            bend={0}
-            textColor="#0077B6"
-            borderRadius={0.05}
-            scrollEase={0.02}
-          />
-        )}
-      </motion.div>
+
     </section>
   )
 }

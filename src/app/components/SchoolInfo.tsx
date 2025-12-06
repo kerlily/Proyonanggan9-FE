@@ -6,9 +6,9 @@ export default function SchoolInfo() {
         {/* Video / Media */}
         <div className="w-full">
           <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
-            <iframe
+           <iframe
               className="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/-H3ap6vuoq8?si=Hoo-PnisNgK-5qQb&autoplay=1&mute=1&playsinline=1&controls=0&loop=1&playlist=-H3ap6vuoq8"
+              src="https://www.youtube.com/embed/40_NfRoxk3I?si=76u_h9k4wUxXm6-9&start=15"
               title="Profil SD Negeri Proyonanggan 09"
               referrerPolicy="strict-origin-when-cross-origin"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

@@ -3,19 +3,17 @@ export default function SchoolInfo() {
     <section className="container max-w-6xl mx-auto px-4 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         
-        {/* Gambar / Video Sekolah */}
+        {/* Video / Media */}
         <div className="w-full">
-          <div className="relative w-full aspect-video">
-            {/* <iframe
-  className="absolute inset-0 w-full h-full rounded-lg shadow-lg pointer-events-none"
-  src="https://www.youtube.com/embed/-H3ap6vuoq8?si=Hoo-PnisNgK-5qQb&autoplay=1&mute=1&playsinline=1&controls=0&loop=1&playlist=-H3ap6vuoq8"
-  title="YouTube video player - SD Negeri Proyonanggan 09"
-  frameBorder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  referrerPolicy="strict-origin-when-cross- origin"
-  allowFullScreen 
-/> */}
-
+          <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/-H3ap6vuoq8?si=Hoo-PnisNgK-5qQb&autoplay=1&mute=1&playsinline=1&controls=0&loop=1&playlist=-H3ap6vuoq8"
+              title="Profil SD Negeri Proyonanggan 09"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
 

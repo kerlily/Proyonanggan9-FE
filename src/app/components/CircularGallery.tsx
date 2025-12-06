@@ -479,35 +479,35 @@ class App {
   ) {
     const defaultItems = [
       {
-        image: `https://picsum.photos/seed/1/800/600?grayscale`,
+        image:"/sekolah/kelas_P.jpg",
         text: "Ruang Kelas",
       },
       {
-        image: `https://picsum.photos/seed/2/800/600?grayscale`,
+        image: `/sekolah/kepsek_P.jpg`,
         text: "Ruang Kepala Sekolah",
       },
       {
-        image: `https://picsum.photos/seed/3/800/600?grayscale`,
+        image: `/sekolah/ruang_guruP.JPG`,
         text: "Ruang Guru",
       },
       {
-        image: `https://picsum.photos/seed/4/800/600?grayscale`,
+        image: `/sekolah/perpus_P.jpg`,
         text: "Perpustakaan",
       },
       {
-        image: `https://picsum.photos/seed/5/800/600?grayscale`,
+        image: `/sekolah/uks_L.JPG`,
         text: "UKS",
       },  
       {
-        image: `https://picsum.photos/seed/16/800/600?grayscale`,
+        image: `/sekolah/wc.JPG`,
         text: "Kamar Mandi",
       },
       {
-        image: `https://picsum.photos/seed/17/800/600?grayscale`,
+        image: `/sekolah/gudang.JPG`,
         text: "Gudang",
       },
       {
-        image: `https://picsum.photos/seed/8/800/600?grayscale`,
+        image: `/sekolah/lapangan.JPG`,
         text: "Lapangan",
       },
     ];

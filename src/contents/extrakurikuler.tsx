@@ -3,7 +3,7 @@ export const intrakurikuler = [
   {
     title: "Pramuka",
     desc: "Kegiatan wajib untuk membentuk kedisiplinan, kepemimpinan, dan kerja sama.",
-    img: "https://picsum.photos/id/1011/600/400",
+    img: "/sekolah/pramuka.jpg",
   },
 ];
 
@@ -11,21 +11,21 @@ export const ekstrakurikuler = [
   {
     title: "Drumband",
     desc: "Mengembangkan bakat musik, kekompakan, dan semangat kebersamaan.",
-    img: "https://picsum.photos/id/1015/600/400",
+    img: "/sekolah/drumband.jpg",
   },
   {
     title: "Pencak Silat",
     desc: "Melatih ketangkasan, keberanian, dan menjaga budaya bangsa.",
-    img: "https://picsum.photos/id/1021/600/400",
+    img: "/sekolah/pencak silat.jpg",
   },
   {
     title: "Hadrah",
     desc: "Kegiatan seni islami untuk memperdalam nilai religius dan kebersamaan.",
-    img: "https://picsum.photos/id/1025/600/400",
+    img: "/sekolah/hadrah.png",
   },
   {
     title: "Olahraga",
     desc: "Ekstrakurikuler futsal, voli, dan olahraga lain untuk kesehatan dan prestasi.",
-    img: "https://picsum.photos/id/1031/600/400",
+    img: "/sekolah/olahraga.jpg",
   },
 ];

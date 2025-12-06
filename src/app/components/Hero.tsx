@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import React, { useEffect, useState } from 'react'
@@ -5,12 +6,13 @@ import { motion } from 'framer-motion'
 import { fadeIn, slideInLeft } from '../utils/animations'
 import HeroSlide from "./HeroSlide"
 import NewsCarousel from './NewsCarousel'
-import { fetchBeritas, fetchGalleries, transformBeritaForComponent, transformGalleryForComponent } from '@/lib/api'
+import { fetchBeritas, transformBeritaForComponent } from '@/lib/api'
 import SchoolInfoLoader from './SchoolInfoLoader'
+import LazyLoadOnScroll from './LazyLoadOnScroll'
+
 
 const Hero = () => {
   const [beritaList, setBeritaList] = useState<any[]>([]);
-  const [galleryItems, setGalleryItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,10 +23,6 @@ const Hero = () => {
         const transformedBeritas = beritas.map(transformBeritaForComponent);
         setBeritaList(transformedBeritas);
 
-        // Load galleries
-        const galleries = await fetchGalleries();
-        const transformedGalleries = galleries.map(transformGalleryForComponent);
-        setGalleryItems(transformedGalleries);
       } catch (error) {
         console.error('Error loading data:', error);
       } finally {
@@ -76,6 +74,28 @@ const Hero = () => {
         transition={{ duration: 0.5, delay: 1.2 }}
       >
         <SchoolInfoLoader />
+      </motion.div>
+
+       {/* Circular Gallery */}
+      <motion.div 
+        {...slideInLeft}
+        transition={{ duration: 0.5, delay: 1.2 }}
+        className="absolute top-0 left-0 w-full h-full overflow-hidden"
+        style={{ height: '600px', position: 'relative' }}
+      >
+      <LazyLoadOnScroll
+        loader={() => import('./CircularGallery')}
+        bend={0}
+        textColor="#0077B6"
+        borderRadius={0.05}
+        scrollEase={0.02}
+      />
+      {/* <CircularGallery 
+        bend={0}
+        textColor="#0077B6"
+        borderRadius={0.05}
+        scrollEase={0.02}
+      /> */}
       </motion.div>
 
     </section>

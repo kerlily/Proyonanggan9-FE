@@ -24,7 +24,7 @@ const Navbar = () => {
     { name: "Beranda", href: "/" },
     { name: "Berita", href: "/berita" },
     { name: "Profile", href: "/profile" },
-    // { name: "Extrakurikuler", href: "/extrakurikuler" },
+    { name: "Gallery", href: "/gallery" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -244,7 +244,7 @@ const Navbar = () => {
               </div>
               <div>
                 <a
-                  href="https://example.com/login"
+                  href="https://lms-proyonanggan9.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block mt-2 px-4 py-2 bg-primary text-white text-center rounded-lg shadow"

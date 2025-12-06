@@ -4,7 +4,6 @@ import Image from "next/image";
 import SplitText from "./SplitText";
 
 const HeroSlide: React.FC = () => {
-  // ubah ekstensi jika perlu (png/webp)
   const images: string[] = useMemo(
     () => [
       "/heroslide1.jpg",

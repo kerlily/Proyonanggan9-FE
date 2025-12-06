@@ -479,11 +479,11 @@ class App {
   ) {
     const defaultItems = [
       {
-        image:"/sekolah/kelas_P.jpg",
+        image:"/sekolah/kelas_P.JPG",
         text: "Ruang Kelas",
       },
       {
-        image: `/sekolah/kepsek_P.jpg`,
+        image: `/sekolah/kepsek_P.JPG`,
         text: "Ruang Kepala Sekolah",
       },
       {
@@ -491,7 +491,7 @@ class App {
         text: "Ruang Guru",
       },
       {
-        image: `/sekolah/perpus_P.jpg`,
+        image: `/sekolah/perpus_P.JPG`,
         text: "Perpustakaan",
       },
       {

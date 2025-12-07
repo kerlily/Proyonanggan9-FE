@@ -29,7 +29,7 @@ export default function VisiMisi() {
           <div className="p-4">
             <div className="relative w-full aspect-square rounded-lg overflow-hidden">
               <Image
-                src="/sekolah/depan_P.jpg"
+                src="/sekolah/depan_P.JPG"
                 alt="Visi Sekolah"
                 fill
                 className="object-cover"
@@ -59,7 +59,7 @@ export default function VisiMisi() {
           <div className="p-4">
             <div className="relative w-full aspect-square rounded-lg overflow-hidden">
               <Image
-                src="/sekolah/lapangan.jpg"
+                src="/sekolah/lapangan.JPG"
                 alt="Misi Sekolah"
                 fill
                 className="object-cover"

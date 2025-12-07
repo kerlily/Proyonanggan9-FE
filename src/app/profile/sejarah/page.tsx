@@ -24,7 +24,7 @@ export default function SejarahPage() {
       transition={{ ...fadeInDown.transition, delay: 0.4 }}
       className="relative w-3/5 mx-auto aspect-video mb-8">
         <Image
-          src="/sekolah/depan_L.jpg" 
+          src="/sekolah/depan_L.JPG" 
           alt="Sejarah SD Negeri Proyonanggan 09"
           fill
           className="object-cover rounded-lg shadow-lg"

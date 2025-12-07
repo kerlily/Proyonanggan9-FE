@@ -16,12 +16,12 @@ export const ekstrakurikuler = [
   {
     title: "Pencak Silat",
     desc: "Melatih ketangkasan, keberanian, dan menjaga budaya bangsa.",
-    img: "/sekolah/pencak silat.jpg",
+    img: "/sekolah/pencaksilat.jpg",
   },
   {
     title: "Hadrah",
     desc: "Kegiatan seni islami untuk memperdalam nilai religius dan kebersamaan.",
-    img: "/sekolah/hadrah.png",
+    img: "/sekolah/hadra.jpeg",
   },
   {
     title: "Olahraga",

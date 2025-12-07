@@ -52,7 +52,7 @@ export default function GalleryPage() {
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow animate-pulse">
-              <div className="w-full aspect-[4/3] bg-gray-300 rounded-md mb-3" />
+              <div className="w-full aspect-4/3 bg-gray-300 rounded-md mb-3" />
             </div>
           ))}
         </div>
@@ -78,7 +78,7 @@ export default function GalleryPage() {
                 transition={{ type: "spring", stiffness: 300 }}
                 className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
               >
-                <div className="relative w-full aspect-[4/3]">
+                <div className="relative w-full aspect-4/3">
                   <Image
                     src={foto.image_url}
                     alt={`galeri-${foto.id}`}

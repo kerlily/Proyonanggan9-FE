@@ -36,7 +36,7 @@ export default function EkstrakurikulerPage() {
               className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
               style={{ zIndex: 10, transformOrigin: 'center' }}
             >
-              <div className="relative w-full aspect-[4/3]">
+              <div className="relative w-full aspect-4/3">
                 <Image
                   src={item.img}
                   alt={item.title}
@@ -74,7 +74,7 @@ export default function EkstrakurikulerPage() {
               className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
               style={{ zIndex: 10, transformOrigin: 'center' }}
             >
-              <div className="relative w-full aspect-[4/3]">
+              <div className="relative w-full aspect-4/3">
                 <Image
                   src={item.img}
                   alt={item.title}

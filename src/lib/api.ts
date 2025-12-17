@@ -96,9 +96,16 @@ export async function fetchBeritas(): Promise<Berita[]> {
 
 // Fetch single berita by ID
 export async function fetchBeritaById(id: string): Promise<Berita | null> {
-  const beritas = await fetchBeritas();
-  return beritas.find(berita => berita.id.toString() === id) || null;
+  const { data, error } = await apiFetch<{ berita: Berita }>(`beritas/${id}`);
+
+  if (error || !data.berita) {
+    console.error('Error fetching berita by id:', error);
+    return null;
+  }
+
+  return data.berita;
 }
+
 
 // Fetch all galleries
 export async function fetchGalleries(): Promise<Gallery[]> {

@@ -2,19 +2,26 @@ import Image from "next/image";
 
 interface GuruCardProps {
   nama: string;
-  jabatan: string;
-  imageUrl: string;
+  nip: string;
+  imageUrl: string | null;
 }
 
-const GuruCard: React.FC<GuruCardProps> = ({ nama, jabatan, imageUrl }) => {
+const DEFAULT_IMAGE = "/profile.jpg";
+
+const GuruCard: React.FC<GuruCardProps> = ({ nama, nip, imageUrl }) => {
+  const src = imageUrl && imageUrl.trim() !== ""
+    ? imageUrl
+    : DEFAULT_IMAGE;
+
   return (
     <div className="bg-white dark:bg-dark border border-gray-200 dark:border-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col items-center p-4">
       {/* Foto */}
-      <div className="relative w-full aspect-[3/4] max-w-[200px] rounded-lg overflow-hidden mb-4">
+      <div className="relative w-full aspect-3/4 max-w-[200px] rounded-lg overflow-hidden mb-4">
         <Image
-          src={imageUrl}
-          alt={nama}
+          src={src}
+          alt={`Foto ${nama}`}
           fill
+          sizes="200px"
           className="object-cover"
         />
       </div>
@@ -24,7 +31,7 @@ const GuruCard: React.FC<GuruCardProps> = ({ nama, jabatan, imageUrl }) => {
         {nama}
       </h3>
       <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
-        {jabatan}
+        NIP: {nip}
       </p>
     </div>
   );

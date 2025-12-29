@@ -59,7 +59,7 @@ const HeroSlide: React.FC = () => {
       <div className="w-full h-full bg-black/40 flex flex-col items-center justify-center px-4 py-8 relative z-20">
         <SplitText
           text="Selamat Datang di Web"
-          className="text-white text-3xl md:text-5xl font-semibold text-center block whitespace-normal break-words leading-tight"
+          className="text-white text-3xl md:text-5xl font-semibold text-center block whitespace-normal wrap-break-word leading-tight"
           delay={100}
           duration={1}
           ease="elastic.out"
@@ -73,7 +73,7 @@ const HeroSlide: React.FC = () => {
         />
         <SplitText
           text="SD Negeri Proyonanggan 9 Batang"
-          className="text-white text-3xl md:text-5xl font-semibold text-center block whitespace-normal break-words leading-tight"
+          className="text-white text-3xl md:text-5xl font-semibold text-center block whitespace-normal wrap-break-word leading-tight"
           delay={50}
           duration={1}
           ease="elastic.out"

@@ -9,15 +9,9 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/storage/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'picsum.photos',
-        port: '',
-        pathname: '/**',
-      },
     ],
     // Tambahan untuk kompatibilitas
-    domains: ['proyonanggan.my.id', 'picsum.photos'],
+    domains: ['proyonanggan.my.id'],
   },
 };
 

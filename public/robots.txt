@@ -1,5 +1,30 @@
-# robots.txt for SD Negeri Proyonanggan 09
-# If you deploy to a custom domain, update the Sitemap URL below.
+# robots.txt untuk SD Negeri Proyonanggan 09
+
+# Allow all search engines
 User-agent: *
 Allow: /
-Sitemap: https://sdnegeriproyonanggan9.vercel.app/sitemap.xml
+Allow: /berita/
+Allow: /profile/
+Allow: /gallery/
+Allow: /contact/
+
+# Disallow admin/private areas if any
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Crawl delay (optional, untuk menghindari overload)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://sdnproyonanggan9.my.id/sitemap.xml
+
+# Specific instructions for Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Specific instructions for Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

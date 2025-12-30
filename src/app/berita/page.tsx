@@ -1,3 +1,4 @@
+// src/app/berita/page.tsx
 import { Metadata } from 'next'
 import { fetchBeritas, transformBeritaForComponent } from '@/lib/api'
 import BeritaClientDisplay from './BeritaClient'

@@ -9,12 +9,21 @@ import Footer from "./components/Footer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: 'swap', 
+  preload: true,
+  fallback: ['system-ui', 'arial'], // Fallback fonts
+  adjustFontFallback: true, // Reduce layout shift
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: 'swap',
+  preload: true,
+  fallback: ['Courier New', 'monospace'],
+  adjustFontFallback: true,
 });
+
 
 // ✅ CARA 1: metadataBase di dalam metadata object
 export const metadata: Metadata = {
@@ -115,6 +124,9 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://proyonanggan.my.id" />
         <link rel="dns-prefetch" href="https://proyonanggan.my.id" />
+
+        <link rel="preload" href="/logo.png" as="image" />
+      
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white transition-colors dark:bg-gray-900 dark:text-white`}

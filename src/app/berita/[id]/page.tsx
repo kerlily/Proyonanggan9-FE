@@ -1,8 +1,28 @@
-import { fetchBeritaById, formatDate } from "@/lib/api";
+// src/app/berita/[id]/page.tsx
+import { fetchBeritaById, fetchBeritas, formatDate } from "@/lib/api";
 import Image from "next/image";
 import { Metadata } from "next";
+import Link from "next/link";
 
-export const revalidate = 3600;
+export const revalidate = 3600; // 1 jam
+
+// 🚀 IMPORTANT: Pre-render berita pages at build time
+export async function generateStaticParams() {
+  try {
+    const beritas = await fetchBeritas();
+    
+    // Pre-render 20 berita terbaru untuk build yang lebih cepat
+    return beritas.slice(0, 20).map((berita) => ({
+      id: berita.id.toString(),
+    }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
+}
+
+// Allow on-demand generation untuk berita yang belum di-render
+export const dynamicParams = true;
 
 // Generate dynamic metadata untuk SEO
 export async function generateMetadata({ 
@@ -72,6 +92,11 @@ export default async function BeritaDetail({
         <p className="text-center text-gray-600 dark:text-gray-400">
           ID berita tidak valid.
         </p>
+        <div className="text-center mt-4">
+          <Link href="/berita" className="text-primary hover:underline">
+            ← Kembali ke Berita
+          </Link>
+        </div>
       </div>
     );
   }
@@ -84,13 +109,18 @@ export default async function BeritaDetail({
         <p className="text-center text-gray-600 dark:text-gray-400">
           Berita tidak ditemukan.
         </p>
+        <div className="text-center mt-4">
+          <Link href="/berita" className="text-primary hover:underline">
+            ← Kembali ke Berita
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
     <>
-      {/* Article Schema */}
+      {/* Article Schema for SEO */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -120,15 +150,24 @@ export default async function BeritaDetail({
       />
 
       <article className="container pt-20 max-w-3xl mx-auto px-4 py-12">
+        {/* Back button */}
+        <Link 
+          href="/berita" 
+          className="inline-flex items-center text-primary hover:underline mb-6"
+        >
+          ← Kembali ke Berita
+        </Link>
+
         <header>
           <h1 className="text-2xl md:text-3xl font-bold mb-4">{berita.title}</h1>
           
-          <div className="relative w-full h-64 md:h-96 mb-4">
+          <div className="relative w-full h-64 md:h-96 mb-4 rounded-lg overflow-hidden">
             <Image 
               src={berita.image_url} 
               alt={berita.title} 
               fill 
-              className="object-cover rounded"
+              sizes="(max-width: 768px) 100vw, 896px"
+              className="object-cover"
               priority
             />
           </div>
@@ -142,9 +181,17 @@ export default async function BeritaDetail({
         </header>
         
         <div className="prose prose-lg dark:prose-invert max-w-none">
-          <p className="text-lg text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+          <p className="text-lg text-gray-700 dark:text-gray-300 whitespace-pre-wrap leading-relaxed">
             {berita.description}
           </p>
+        </div>
+
+        {/* Share buttons (optional) */}
+        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Bagikan artikel ini
+          </p>
+          {/* Add share buttons here if needed */}
         </div>
       </article>
     </>

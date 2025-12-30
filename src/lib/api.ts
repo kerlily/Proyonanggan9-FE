@@ -1,9 +1,8 @@
-// API configuration and utility functions
-
+// src/lib/api.ts - Optimized version
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://proyonanggan.my.id/api';
 const API_PREFIX = process.env.NEXT_PUBLIC_API_PREFIX || 'public';
 
-// Type definitions
+// Type definitions (sama seperti sebelumnya)
 export interface Guru {
   id: string;
   nama: string;
@@ -33,32 +32,65 @@ interface ApiResponse<T> {
   error?: string;
 }
 
-// Generic fetch function with error handling
-async function apiFetch<T>(endpoint: string): Promise<ApiResponse<T>> {
-  try {
-    const url = `${API_BASE_URL}/${endpoint}`;
-    console.log('Fetching from:', url);
-    
-    const response = await fetch(url, {
-      next: { revalidate: 3600 } // Cache for 1 hour
-    });
+// ✅ Optimized fetch dengan retry logic
+async function apiFetch<T>(
+  endpoint: string, 
+  options: RequestInit & { retries?: number } = {}
+): Promise<ApiResponse<T>> {
+  const { retries = 2, ...fetchOptions } = options;
+  
+  for (let i = 0; i <= retries; i++) {
+    try {
+      const url = `${API_BASE_URL}/${endpoint}`;
+      
+      const response = await fetch(url, {
+        ...fetchOptions,
+        next: { 
+          revalidate: 3600,
+          tags: [endpoint] // For on-demand revalidation
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          ...fetchOptions.headers,
+        },
+      });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      return { data };
+      
+    } catch (error) {
+      // Retry on last attempt
+      if (i === retries) {
+        console.error(`Failed after ${retries + 1} attempts:`, error);
+        return { 
+          data: {} as T, 
+          error: error instanceof Error ? error.message : 'Network error' 
+        };
+      }
+      
+      // Wait before retry (exponential backoff)
+      await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
     }
-
-    const data = await response.json();
-    return { data };
-  } catch (error) {
-    console.error(`Error fetching ${endpoint}:`, error);
-    return { 
-      data: {} as T, 
-      error: error instanceof Error ? error.message : 'Unknown error' 
-    };
   }
+  
+  return { data: {} as T, error: 'Max retries exceeded' };
 }
 
-// Fetch all gurus
+// ✅ Parallel fetching untuk homepage
+export async function fetchHomePageData() {
+  const [beritas, galleries] = await Promise.all([
+    fetchBeritas(),
+    fetchGalleries()
+  ]);
+  
+  return { beritas, galleries };
+}
+
+// Fetch functions (sama seperti sebelumnya, tapi dengan retry)
 export async function fetchGurus(): Promise<Guru[]> {
   const { data, error } = await apiFetch<{ gurus: Guru[] }>(`${API_PREFIX}/guru`);
   
@@ -67,15 +99,13 @@ export async function fetchGurus(): Promise<Guru[]> {
     return [];
   }
 
-  // Map data and add default jabatan if not present
   return data.gurus.map(guru => ({
     ...guru,
     jabatan: guru.jabatan || 'Guru',
-    imageUrl: guru.photo // Add alias for compatibility
+    imageUrl: guru.photo
   }));
 }
 
-// Fetch all beritas
 export async function fetchBeritas(): Promise<Berita[]> {
   const { data, error } = await apiFetch<{ beritas: Berita[] }>('beritas');
   
@@ -84,7 +114,6 @@ export async function fetchBeritas(): Promise<Berita[]> {
     return [];
   }
 
-  // Filter only published beritas and sort by date
   return data.beritas
     .filter(berita => berita.is_published)
     .sort((a, b) => {
@@ -94,7 +123,6 @@ export async function fetchBeritas(): Promise<Berita[]> {
     });
 }
 
-// Fetch single berita by ID
 export async function fetchBeritaById(id: string): Promise<Berita | null> {
   const { data, error } = await apiFetch<{ berita: Berita }>(`beritas/${id}`);
 
@@ -106,8 +134,6 @@ export async function fetchBeritaById(id: string): Promise<Berita | null> {
   return data.berita;
 }
 
-
-// Fetch all galleries
 export async function fetchGalleries(): Promise<Gallery[]> {
   const { data, error } = await apiFetch<{ galleries: Gallery[] }>('galleries');
   
@@ -116,14 +142,13 @@ export async function fetchGalleries(): Promise<Gallery[]> {
     return [];
   }
 
-  // Add default text for each gallery item
   return data.galleries.map((item, index) => ({
     ...item,
     text: item.text || `Galeri ${index + 1}`
   }));
 }
 
-// Format date helper
+// Format date helper (sama)
 export function formatDate(dateString: string | null): string {
   if (!dateString) return 'Tanggal tidak tersedia';
   
@@ -140,7 +165,7 @@ export function formatDate(dateString: string | null): string {
   }
 }
 
-// Transform berita for compatibility with existing components
+// Transform functions (sama seperti sebelumnya)
 export function transformBeritaForComponent(berita: Berita) {
   return {
     id: berita.id.toString(),
@@ -152,7 +177,6 @@ export function transformBeritaForComponent(berita: Berita) {
   };
 }
 
-// Transform guru for compatibility with existing components
 export function transformGuruForComponent(guru: Guru) {
   return {
     id: guru.id,
@@ -163,7 +187,6 @@ export function transformGuruForComponent(guru: Guru) {
   };
 }
 
-// Transform gallery for CircularGallery component
 export function transformGalleryForComponent(gallery: Gallery) {
   return {
     image: gallery.image_url,

@@ -6,7 +6,7 @@ import NewsCard from "../components/NewsCard"
 import { motion } from "framer-motion"
 import { slideInLeft, fadeInUp, staggerContainer } from "../utils/animations"
 
-const ITEMS_PER_PAGE = 9; 
+const ITEMS_PER_PAGE = 9; // 9 item per halaman
 
 interface BeritaClientDisplayProps {
   beritas: any[];

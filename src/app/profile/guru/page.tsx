@@ -1,21 +1,20 @@
 import { Metadata } from 'next'
-import GuruClient from './GuruClient'
+import { fetchGurus, transformGuruForComponent } from '@/lib/api'
+import GuruClientDisplay from './GuruClient'
 
 export const metadata: Metadata = {
   title: 'Guru & Tenaga Pendidik',
-  description: 'Daftar guru dan tenaga pendidik profesional SD Negeri Proyonanggan 09 Batang yang berdedikasi dalam mendidik siswa-siswi',
-  keywords: ['guru SD Proyonanggan', 'tenaga pendidik Batang', 'staf pengajar'],
-  openGraph: {
-    title: 'Guru & Tenaga Pendidik - SD Negeri Proyonanggan 09',
-    description: 'Kenali guru-guru profesional di SD Negeri Proyonanggan 09',
-  },
+  description: 'Daftar guru dan tenaga pendidik profesional SD Negeri Proyonanggan 09 Batang',
+  keywords: ['guru SD Proyonanggan', 'tenaga pendidik Batang'],
   alternates: {
     canonical: 'https://sdnproyonanggan9.my.id/profile/guru'
   }
 }
 
-export const revalidate = 86400 // Cache 24 jam
-
-export default function GuruPage() {
-  return <GuruClient />
+export const revalidate = 86400; 
+export default async function GuruPage() {
+  const gurusData = await fetchGurus();
+  const transformedGurus = gurusData.map(transformGuruForComponent);
+  
+  return <GuruClientDisplay gurus={transformedGurus} />;
 }

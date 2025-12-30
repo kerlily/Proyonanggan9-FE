@@ -32,7 +32,7 @@ export default function NewsCarousel({ items }: { items: NewsItem[] }) {
       >
         <div className="flex gap-4 px-4">
           {items.map((it) => (
-            <div key={it.id} className="snap-start flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 overflow-visible">
+            <div key={it.id} className="snap-start shrink-0 w-full sm:w-1/2 lg:w-1/3 overflow-visible">
               <div className="overflow-visible">
                 <NewsCard {...it} />
               </div>

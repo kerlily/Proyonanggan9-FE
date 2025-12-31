@@ -6,12 +6,16 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'proyonanggan.my.id',
-        port: '',
         pathname: '/storage/**',
       },
     ],
-    // Tambahan untuk kompatibilitas
-    domains: ['proyonanggan.my.id'],
+    formats: ['image/avif', 'image/webp'],
+  },
+  poweredByHeader: false,
+
+  compress: true,
+  experimental: {
+    optimizePackageImports: ['framer-motion', 'lucide-react'],
   },
 };
 

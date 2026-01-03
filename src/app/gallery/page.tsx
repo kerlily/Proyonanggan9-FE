@@ -1,21 +1,6 @@
 import { Metadata } from "next";
 import GalleryClientWrapper from "./GalleryClient";
-
-async function getGalleryData() {
-  try {
-    const res = await fetch('https://proyonanggan.my.id/api/galleries', {
-      next: { revalidate: 86400 } // Cache 24 jam (lebih realistis)
-    });
-    
-    if (!res.ok) throw new Error('Failed to fetch');
-    
-    const data = await res.json();
-    return data.galleries || [];
-  } catch (error) {
-    console.error('Gallery fetch error:', error);
-    return [];
-  }
-}
+import { fetchGalleries } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Gallery Foto Sekolah",
@@ -40,7 +25,7 @@ export const metadata: Metadata = {
 export const revalidate = 86400; 
 
 export default async function GalleryPage() {
-  const fotos = await getGalleryData();
+  const fotos = await fetchGalleries();
   
   return <GalleryClientWrapper initialFotos={fotos} />;
 }

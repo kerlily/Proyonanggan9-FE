@@ -1,11 +1,10 @@
-// src/lib/api.ts - Optimized version
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://proyonanggan.my.id/api';
 const API_PREFIX = process.env.NEXT_PUBLIC_API_PREFIX || 'public';
 
-// Type definitions (sama seperti sebelumnya)
+// Type definitions 
 export interface Guru {
   id: string;
-  nama: string;
+  nama: string; 
   nip: string;
   photo: string;
   jabatan?: string;
@@ -32,7 +31,6 @@ interface ApiResponse<T> {
   error?: string;
 }
 
-// ✅ Optimized fetch dengan retry logic
 async function apiFetch<T>(
   endpoint: string, 
   options: RequestInit & { retries?: number } = {}
@@ -47,8 +45,9 @@ async function apiFetch<T>(
         ...fetchOptions,
         next: { 
           revalidate: 3600,
-          tags: [endpoint] // For on-demand revalidation
+          tags: [endpoint] 
         },
+        cache: 'force-cache',
         headers: {
           'Content-Type': 'application/json',
           ...fetchOptions.headers,

@@ -14,7 +14,6 @@ export const metadata: Metadata = {
     canonical: 'https://sdnproyonanggan9.my.id/profile/visi-misi'
   }
 };
-export const revalidate = 2592000 // Cache 30 hari
 
 export default function VisiMisi() {
   return <VisiMisiClient />;

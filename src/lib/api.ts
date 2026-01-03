@@ -43,11 +43,7 @@ async function apiFetch<T>(
       
       const response = await fetch(url, {
         ...fetchOptions,
-        next: { 
-          revalidate: 3600,
-          tags: [endpoint] 
-        },
-        cache: 'force-cache',
+        cache: 'force-cache', // force-cache biar api down data tetep ambil dari yg kseimpen id next terakhir kali
         headers: {
           'Content-Type': 'application/json',
           ...fetchOptions.headers,
@@ -89,7 +85,7 @@ export async function fetchHomePageData() {
   return { beritas, galleries };
 }
 
-// Fetch functions (sama seperti sebelumnya, tapi dengan retry)
+// Fetch functions
 export async function fetchGurus(): Promise<Guru[]> {
   const { data, error } = await apiFetch<{ gurus: Guru[] }>(`${API_PREFIX}/guru`);
   
@@ -147,7 +143,7 @@ export async function fetchGalleries(): Promise<Gallery[]> {
   }));
 }
 
-// Format date helper (sama)
+// Format date helper
 export function formatDate(dateString: string | null): string {
   if (!dateString) return 'Tanggal tidak tersedia';
   
@@ -164,7 +160,7 @@ export function formatDate(dateString: string | null): string {
   }
 }
 
-// Transform functions (sama seperti sebelumnya)
+// Transform functions
 export function transformBeritaForComponent(berita: Berita) {
   return {
     id: berita.id.toString(),

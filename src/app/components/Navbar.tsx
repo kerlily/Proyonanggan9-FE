@@ -1,3 +1,4 @@
+// src/app/components/Navbar.tsx
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -12,41 +13,40 @@ import {
 import { useTheme } from "../context/ThemeContext";
 import Image from "next/image";
 
+const MENU_ITEMS = [
+  { name: "Beranda", href: "/" },
+  { name: "Berita", href: "/berita" },
+  { name: "Profile", href: "/profile" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Contact", href: "/contact" },
+] as const;
+
+const PROFILE_SUBMENU = [
+  { name: "Sejarah Sekolah", href: "/profile/sejarah" },
+  { name: "Visi & Misi", href: "/profile/visi-misi" },
+  { name: "Guru & Staf", href: "/profile/guru" },
+  { name: "Extrakurikuler", href: "/profile/extrakurikuler" },
+  { name: "Fasilitas", href: "/profile/fasilitas" },
+] as const;
+
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const pathname = usePathname();
+  
+  const profileRef = useRef<HTMLDivElement | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const menuItems = [
-    { name: "Beranda", href: "/" },
-    { name: "Berita", href: "/berita" },
-    { name: "Profile", href: "/profile" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Contact", href: "/contact" },
-  ];
-
-  const profileSubmenu = [
-    { name: "Sejarah Sekolah", href: "/profile/sejarah" },
-    { name: "Visi & Misi", href: "/profile/visi-misi" },
-    { name: "Guru & Staf", href: "/profile/guru" },
-    { name: "Extrakurikuler", href: "/profile/extrakurikuler" },
-    { name: "Fasilitas", href: "/profile/fasilitas" },
-  ];
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const profileRef = useRef<HTMLDivElement | null>(null);
-  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
-
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       const target = e.target as Node;
-      // if click inside desktop profile menu, ignore
       if (profileRef.current && profileRef.current.contains(target)) return;
-      // if click inside mobile menu, ignore
       if (mobileMenuRef.current && mobileMenuRef.current.contains(target)) return;
-      // otherwise close profile submenu
       setIsProfileOpen(false);
     }
 
@@ -65,16 +65,19 @@ const Navbar = () => {
   return (
     <nav className="fixed w-full bg-white/80 dark:bg-dark/80 backdrop-blur-sm z-50 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
       <div className="container max-w-7xl mx-auto px-4">
-        {/* dekstop menu */}
+        {/* Desktop menu */}
         <div className="flex items-center justify-between h-16">
-          {/* logo */}
-          <Image src="/logo.png" alt="logo" width={50} height={50} />
+          {/* Logo */}
+          <Link href="/">
+            <Image src="/logo.png" alt="logo" width={50} height={50} />
+          </Link>
 
-          {/* desktop menu */}
+          {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {menuItems.map((item) => {
+            {MENU_ITEMS.map((item) => {
               const isActive = pathname === item.href;
-              // Render Profile with submenu
+              
+              // Profile with submenu
               if (item.name === "Profile") {
                 return (
                   <div
@@ -85,11 +88,7 @@ const Navbar = () => {
                     <Link
                       href={item.href}
                       onClick={(e) => {
-                        // prevent navigation and toggle submenu on click in desktop
-                        if (
-                          typeof window !== "undefined" &&
-                          window.innerWidth >= 768
-                        ) {
+                        if (typeof window !== "undefined" && window.innerWidth >= 768) {
                           e.preventDefault();
                           setIsProfileOpen(!isProfileOpen);
                         }
@@ -106,7 +105,8 @@ const Navbar = () => {
                         }`}
                       />
                     </Link>
-                    {/* Desktop dropdown: visible on hover or when clicked open */}
+                    
+                    {/* Desktop dropdown */}
                     <div
                       className={`${
                         isProfileOpen
@@ -115,7 +115,7 @@ const Navbar = () => {
                       } absolute left-0 mt-2 w-56 rounded-lg bg-white dark:bg-dark/80 border border-gray-200 dark:border-gray-700 shadow-lg group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all`}
                     >
                       <div className="py-2">
-                        {profileSubmenu.map((sub) => (
+                        {PROFILE_SUBMENU.map((sub) => (
                           <Link
                             key={sub.href}
                             href={sub.href}
@@ -142,9 +142,11 @@ const Navbar = () => {
                 </Link>
               );
             })}
+            
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-gray-100   hover:text-primary dark:hover:bg-gray-800 transition-colors cursor-pointer duration-300 dark:text-white"
+              className="p-2 rounded-lg hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800 transition-colors cursor-pointer duration-300 dark:text-white"
+              aria-label="Toggle theme"
             >
               {theme === "dark" ? (
                 <SunIcon className="w-6 h-6" />
@@ -152,7 +154,7 @@ const Navbar = () => {
                 <MoonIcon className="w-6 h-6" />
               )}
             </button>
-            {/* Login button (Masuk) - prominent */}
+            
             <a
               href="https://lms-proyonanggan9.vercel.app/"
               target="_blank"
@@ -162,10 +164,12 @@ const Navbar = () => {
               Masuk
             </a>
           </div>
-          {/* mobile menu button */}
+          
+          {/* Mobile menu button */}
           <button
             onClick={toggleMobileMenu}
             className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer"
+            aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? (
               <XMarkIcon className="w-6 h-6" />
@@ -175,11 +179,11 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* mobile menu */}
+        {/* Mobile menu */}
         {isMobileMenuOpen && (
-          <div ref={mobileMenuRef} className="md:hidden ">
+          <div ref={mobileMenuRef} className="md:hidden">
             <div className="py-4 space-y-4">
-              {menuItems.map((item, index) => {
+              {MENU_ITEMS.map((item, index) => {
                 if (item.name === "Profile") {
                   return (
                     <div key={index}>
@@ -198,7 +202,7 @@ const Navbar = () => {
                       </button>
                       {isProfileOpen && (
                         <div className="pl-6">
-                          {profileSubmenu.map((sub) => (
+                          {PROFILE_SUBMENU.map((sub) => (
                             <Link
                               key={sub.href}
                               href={sub.href}
@@ -233,15 +237,16 @@ const Navbar = () => {
                 >
                   {theme === "dark" ? (
                     <>
-                      <SunIcon className="w-6 h-6" /> Light Mode
+                      <SunIcon className="w-6 h-6 mr-2" /> Light Mode
                     </>
                   ) : (
                     <>
-                      <MoonIcon className="w-6 h-6" /> Dark Mode
+                      <MoonIcon className="w-6 h-6 mr-2" /> Dark Mode
                     </>
                   )}
                 </button>
               </div>
+              
               <div>
                 <a
                   href="https://lms-proyonanggan9.vercel.app/"

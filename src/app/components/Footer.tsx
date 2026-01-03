@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { FaFacebook, FaInstagram, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa'
+import { FaInstagram, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa'
 
 export default function Footer() {
   return (
@@ -42,8 +42,8 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-primary">Link Cepat</h3>
             <ul className="mt-3 space-y-2 text-secondary text-sm">
               <li><Link href="/" className="hover:text-primary">Beranda</Link></li>
-              <li><Link href="https://example.com/login" className="hover:text-primary">LMS</Link></li>
-              <li><Link href="/artikel" className="hover:text-primary">Artikel</Link></li>
+              <li><Link href="https://lms-proyonanggan9.vercel.app/" className="hover:text-primary">LMS</Link></li>
+              <li><Link href="/gallery" className="hover:text-primary">Gallery</Link></li>
               <li><Link href="/contact" className="hover:text-primary">Kontak</Link></li>
             </ul>
           </div>
@@ -71,10 +71,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-secondary">
           <p>© {new Date().getFullYear()} SD Negeri Proyonanggan 09. All rights reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
-              <FaFacebook className="h-5 w-5" />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
+            <a href="https://www.instagram.com/sdn_proyonanggan9_batang?igsh=MXZlZGdkY2U3MWdvag==" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
               <FaInstagram className="h-5 w-5" />
             </a>
           </div>

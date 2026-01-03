@@ -1,6 +1,4 @@
-export const dynamic = 'force-static' 
-export const revalidate = 1800 
-export const fetchCache = 'default-cache'
+ export const revalidate = 1800 
 
 import { fetchBeritas, transformBeritaForComponent } from '@/lib/api';
 import HeroClient from "./components/Hero";

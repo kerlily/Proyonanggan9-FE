@@ -14,7 +14,7 @@ interface HeroClientProps {
 }
 
 const HeroClient = ({ initialBeritas }: HeroClientProps) => {
-  const [beritaList] = useState(initialBeritas); // No need to fetch again
+  const [beritaList] = useState(initialBeritas); 
 
   return (
     <section className="relative">

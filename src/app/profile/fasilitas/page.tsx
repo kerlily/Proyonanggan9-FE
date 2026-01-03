@@ -22,8 +22,6 @@ export const metadata: Metadata = {
   }
 }
 
-export const revalidate = 2592000 
-
 export default function FasilitasPage() {
   return <FasilitasClient />;
 }

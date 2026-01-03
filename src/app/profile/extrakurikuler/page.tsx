@@ -10,8 +10,6 @@ export const metadata: Metadata = {
   }
 }
 
-export const revalidate = 2592000 
-
 export default function EkstrakurikulerPage() {
   return <EkstrakurikulerClient />
 }

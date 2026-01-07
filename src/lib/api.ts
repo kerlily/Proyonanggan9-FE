@@ -31,11 +31,20 @@ interface ApiResponse<T> {
   error?: string;
 }
 
+interface ApiFetchOptions extends RequestInit {
+  retries?: number;
+  useCache?: boolean; // ✅ NEW: kontrol cache strategy
+}
+
+/**
+ * Generic API fetch dengan retry logic
+ * @param useCache - true untuk halaman (reliability), false untuk sitemap (freshness)
+ */
 async function apiFetch<T>(
   endpoint: string, 
-  options: RequestInit & { retries?: number } = {}
+  options: ApiFetchOptions = {}
 ): Promise<ApiResponse<T>> {
-  const { retries = 2, ...fetchOptions } = options;
+  const { retries = 2, useCache = true, ...fetchOptions } = options;
   
   for (let i = 0; i <= retries; i++) {
     try {
@@ -43,7 +52,9 @@ async function apiFetch<T>(
       
       const response = await fetch(url, {
         ...fetchOptions,
-        cache: 'force-cache', // force-cache biar api down data tetep ambil dari yg kseimpen id next terakhir kali
+        // ✅ Conditional caching berdasarkan context
+        cache: useCache ? 'force-cache' : 'no-store',
+        next: useCache ? undefined : { revalidate: 0 },
         headers: {
           'Content-Type': 'application/json',
           ...fetchOptions.headers,
@@ -58,7 +69,6 @@ async function apiFetch<T>(
       return { data };
       
     } catch (error) {
-      // Retry on last attempt
       if (i === retries) {
         console.error(`Failed after ${retries + 1} attempts:`, error);
         return { 
@@ -67,7 +77,7 @@ async function apiFetch<T>(
         };
       }
       
-      // Wait before retry (exponential backoff)
+      // Exponential backoff
       await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
     }
   }
@@ -75,7 +85,8 @@ async function apiFetch<T>(
   return { data: {} as T, error: 'Max retries exceeded' };
 }
 
-// ✅ Parallel fetching untuk homepage
+// ===== CACHED VERSIONS (untuk halaman) =====
+
 export async function fetchHomePageData() {
   const [beritas, galleries] = await Promise.all([
     fetchBeritas(),
@@ -85,9 +96,11 @@ export async function fetchHomePageData() {
   return { beritas, galleries };
 }
 
-// Fetch functions
 export async function fetchGurus(): Promise<Guru[]> {
-  const { data, error } = await apiFetch<{ gurus: Guru[] }>(`${API_PREFIX}/guru`);
+  const { data, error } = await apiFetch<{ gurus: Guru[] }>(
+    `${API_PREFIX}/guru`,
+    { useCache: true } // ✅ Gunakan cache
+  );
   
   if (error || !data.gurus) {
     console.error('Error fetching gurus:', error);
@@ -102,7 +115,10 @@ export async function fetchGurus(): Promise<Guru[]> {
 }
 
 export async function fetchBeritas(): Promise<Berita[]> {
-  const { data, error } = await apiFetch<{ beritas: Berita[] }>('beritas');
+  const { data, error } = await apiFetch<{ beritas: Berita[] }>(
+    'beritas',
+    { useCache: true } // ✅ Gunakan cache
+  );
   
   if (error || !data.beritas) {
     console.error('Error fetching beritas:', error);
@@ -119,7 +135,10 @@ export async function fetchBeritas(): Promise<Berita[]> {
 }
 
 export async function fetchBeritaById(id: string): Promise<Berita | null> {
-  const { data, error } = await apiFetch<{ berita: Berita }>(`beritas/${id}`);
+  const { data, error } = await apiFetch<{ berita: Berita }>(
+    `beritas/${id}`,
+    { useCache: true } // ✅ Gunakan cache
+  );
 
   if (error || !data.berita) {
     console.error('Error fetching berita by id:', error);
@@ -130,7 +149,10 @@ export async function fetchBeritaById(id: string): Promise<Berita | null> {
 }
 
 export async function fetchGalleries(): Promise<Gallery[]> {
-  const { data, error } = await apiFetch<{ galleries: Gallery[] }>('galleries');
+  const { data, error } = await apiFetch<{ galleries: Gallery[] }>(
+    'galleries',
+    { useCache: true } // ✅ Gunakan cache
+  );
   
   if (error || !data.galleries) {
     console.error('Error fetching galleries:', error);
@@ -143,7 +165,34 @@ export async function fetchGalleries(): Promise<Gallery[]> {
   }));
 }
 
-// Format date helper
+// ===== NO-CACHE VERSIONS (khusus untuk sitemap) =====
+
+/**
+ * ✅ NEW: Fetch beritas tanpa cache untuk sitemap generation
+ * Tetap ada retry logic untuk reliability
+ */
+export async function fetchBeritasNoCache(): Promise<Berita[]> {
+  const { data, error } = await apiFetch<{ beritas: Berita[] }>(
+    'beritas',
+    { useCache: false, retries: 1 } // No cache, minimal retry
+  );
+  
+  if (error || !data.beritas) {
+    console.error('Error fetching beritas (no-cache):', error);
+    return [];
+  }
+
+  return data.beritas
+    .filter(berita => berita.is_published)
+    .sort((a, b) => {
+      const dateA = new Date(a.published_at || a.created_by);
+      const dateB = new Date(b.published_at || b.created_by);
+      return dateB.getTime() - dateA.getTime();
+    });
+}
+
+// ===== HELPERS =====
+
 export function formatDate(dateString: string | null): string {
   if (!dateString) return 'Tanggal tidak tersedia';
   
@@ -160,7 +209,6 @@ export function formatDate(dateString: string | null): string {
   }
 }
 
-// Transform functions
 export function transformBeritaForComponent(berita: Berita) {
   return {
     id: berita.id.toString(),

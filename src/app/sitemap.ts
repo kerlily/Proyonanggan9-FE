@@ -1,5 +1,8 @@
 import { MetadataRoute } from 'next'
-import { fetchBeritas } from '@/lib/api'
+import { fetchBeritasNoCache } from '@/lib/api'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://sdnproyonanggan9.my.id'
@@ -68,9 +71,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  // Dynamic berita pages
+  // Dynamic berita pages - gunakan no-cache version
   try {
-    const beritas = await fetchBeritas()
+    const beritas = await fetchBeritasNoCache()
+    
     const beritaPages: MetadataRoute.Sitemap = beritas.map((berita) => ({
       url: `${baseUrl}/berita/${berita.id}`,
       lastModified: berita.published_at ? new Date(berita.published_at) : new Date(),
@@ -81,6 +85,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return [...staticPages, ...beritaPages]
   } catch (error) {
     console.error('Error generating sitemap:', error)
+    // Graceful fallback: return static pages only
     return staticPages
   }
 }

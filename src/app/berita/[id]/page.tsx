@@ -6,7 +6,6 @@ import Link from "next/link";
 export const dynamic = 'force-static'
 export const revalidate = 3600 // 1 jam
 export const dynamicParams = true
-export const fetchCache = 'default-cache'
 
 // Generate static params untuk 50 berita terbaru
 export async function generateStaticParams() {

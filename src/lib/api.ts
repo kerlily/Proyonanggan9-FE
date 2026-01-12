@@ -33,18 +33,14 @@ interface ApiResponse<T> {
 
 interface ApiFetchOptions extends RequestInit {
   retries?: number;
-  useCache?: boolean; // ✅ NEW: kontrol cache strategy
+  revalidate?: number | false; 
 }
 
-/**
- * Generic API fetch dengan retry logic
- * @param useCache - true untuk halaman (reliability), false untuk sitemap (freshness)
- */
 async function apiFetch<T>(
   endpoint: string, 
   options: ApiFetchOptions = {}
 ): Promise<ApiResponse<T>> {
-  const { retries = 2, useCache = true, ...fetchOptions } = options;
+  const { retries = 2, revalidate = 3600, ...fetchOptions } = options;
   
   for (let i = 0; i <= retries; i++) {
     try {
@@ -52,9 +48,10 @@ async function apiFetch<T>(
       
       const response = await fetch(url, {
         ...fetchOptions,
-        // ✅ Conditional caching berdasarkan context
-        cache: useCache ? 'force-cache' : 'no-store',
-        next: useCache ? undefined : { revalidate: 0 },
+        next: { 
+          revalidate: revalidate === false ? 0 : revalidate,
+          tags: [endpoint] 
+        },
         headers: {
           'Content-Type': 'application/json',
           ...fetchOptions.headers,
@@ -85,7 +82,7 @@ async function apiFetch<T>(
   return { data: {} as T, error: 'Max retries exceeded' };
 }
 
-// ===== CACHED VERSIONS (untuk halaman) =====
+
 
 export async function fetchHomePageData() {
   const [beritas, galleries] = await Promise.all([
@@ -99,7 +96,7 @@ export async function fetchHomePageData() {
 export async function fetchGurus(): Promise<Guru[]> {
   const { data, error } = await apiFetch<{ gurus: Guru[] }>(
     `${API_PREFIX}/guru`,
-    { useCache: true } // ✅ Gunakan cache
+    { revalidate: 86400 } // 24 jam
   );
   
   if (error || !data.gurus) {
@@ -114,10 +111,11 @@ export async function fetchGurus(): Promise<Guru[]> {
   }));
 }
 
+
 export async function fetchBeritas(): Promise<Berita[]> {
   const { data, error } = await apiFetch<{ beritas: Berita[] }>(
     'beritas',
-    { useCache: true } // ✅ Gunakan cache
+    { revalidate: 1800 } // 30 menit
   );
   
   if (error || !data.beritas) {
@@ -134,10 +132,11 @@ export async function fetchBeritas(): Promise<Berita[]> {
     });
 }
 
+
 export async function fetchBeritaById(id: string): Promise<Berita | null> {
   const { data, error } = await apiFetch<{ berita: Berita }>(
     `beritas/${id}`,
-    { useCache: true } // ✅ Gunakan cache
+    { revalidate: 3600 } // 1 jam
   );
 
   if (error || !data.berita) {
@@ -151,7 +150,7 @@ export async function fetchBeritaById(id: string): Promise<Berita | null> {
 export async function fetchGalleries(): Promise<Gallery[]> {
   const { data, error } = await apiFetch<{ galleries: Gallery[] }>(
     'galleries',
-    { useCache: true } // ✅ Gunakan cache
+    { revalidate: 86400 } // 24 jam
   );
   
   if (error || !data.galleries) {
@@ -165,16 +164,10 @@ export async function fetchGalleries(): Promise<Gallery[]> {
   }));
 }
 
-// ===== NO-CACHE VERSIONS (khusus untuk sitemap) =====
-
-/**
- * ✅ NEW: Fetch beritas tanpa cache untuk sitemap generation
- * Tetap ada retry logic untuk reliability
- */
 export async function fetchBeritasNoCache(): Promise<Berita[]> {
   const { data, error } = await apiFetch<{ beritas: Berita[] }>(
     'beritas',
-    { useCache: false, retries: 1 } // No cache, minimal retry
+    { revalidate: false, retries: 1 } 
   );
   
   if (error || !data.beritas) {

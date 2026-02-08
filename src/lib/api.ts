@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://proyonanggan.my.id/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
 const API_PREFIX = process.env.NEXT_PUBLIC_API_PREFIX || 'public';
 
 // Type definitions 
@@ -125,6 +125,25 @@ export async function fetchBeritas(): Promise<Berita[]> {
 
   return data.beritas
     .filter(berita => berita.is_published)
+    .sort((a, b) => {
+      const dateA = new Date(a.published_at || a.created_by);
+      const dateB = new Date(b.published_at || b.created_by);
+      return dateB.getTime() - dateA.getTime();
+    });
+}
+
+export async function fetchPengumuman(): Promise<Berita[]> {
+  const { data, error } = await apiFetch<{ pengumuman: Berita[] }>(
+    'pengumuman',
+    { revalidate: 1800 }
+  );
+  
+  if (error || !data.pengumuman) {
+    console.error('Error fetching pengumuman:', error);
+    return [];
+  }
+
+  return data.pengumuman
     .sort((a, b) => {
       const dateA = new Date(a.published_at || a.created_by);
       const dateB = new Date(b.published_at || b.created_by);

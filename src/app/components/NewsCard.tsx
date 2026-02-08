@@ -19,9 +19,10 @@ interface NewsCardProps {
   excerpt: string;
   imageUrl: string;
   date: string;
+  type?: string;  
 }
 
-const NewsCard: React.FC<NewsCardProps> = ({ id, title, excerpt, imageUrl, date }) => {
+const NewsCard: React.FC<NewsCardProps> = ({ id, title, excerpt, imageUrl, date, type }) => {
   return (
     <MotionDiv
       initial={{ opacity: 0, y: 8 }}
@@ -30,6 +31,14 @@ const NewsCard: React.FC<NewsCardProps> = ({ id, title, excerpt, imageUrl, date 
       className="bg-white dark:bg-dark border border-gray-200 dark:border-gray-700 rounded-lg shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden"
     >
       <div className="relative w-full h-48">
+         {/* Badge Pengumuman di atas gambar */}
+        {type === 'pengumuman' && (
+          <div className="absolute top-2 left-2 z-10">
+            <span className="px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full shadow-lg">
+              📢 PENGUMUMAN
+            </span>
+          </div>
+        )}
         <Image
           src={imageUrl}
           alt={title}

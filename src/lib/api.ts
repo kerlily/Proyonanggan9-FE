@@ -14,6 +14,7 @@ export interface Berita {
   id: number;
   title: string;
   description: string;
+  type?: string;
   is_published: boolean;
   published_at: string | null;
   created_by: string;
@@ -229,7 +230,8 @@ export function transformBeritaForComponent(berita: Berita) {
     excerpt: berita.description.substring(0, 150) + (berita.description.length > 150 ? '...' : ''),
     imageUrl: berita.image_url,
     date: formatDate(berita.published_at),
-    description: berita.description
+    description: berita.description,
+    type: berita.type || 'berita'
   };
 }
 

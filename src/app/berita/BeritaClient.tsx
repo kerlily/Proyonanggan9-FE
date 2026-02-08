@@ -5,27 +5,24 @@ import { useState } from "react"
 import NewsCard from "../components/NewsCard"
 import { motion } from "framer-motion"
 import { slideInLeft, fadeInUp, staggerContainer } from "../utils/animations"
-import { FaEnvelope, FaPhoneAlt } from "react-icons/fa"
 
 const ITEMS_PER_PAGE = 9; 
 
 interface BeritaClientDisplayProps {
   beritas: any[];
-  type?: 'berita' | 'pengumuman'; // ✅ Tambah prop type
+  type?: 'berita' | 'pengumuman';
 }
 
 export default function BeritaClientDisplay({ 
   beritas, 
-  type = 'berita' // ✅ Default berita
+  type = 'berita'
 }: BeritaClientDisplayProps) {
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
-  // ✅ Filter berdasarkan type
   const filteredBeritas = beritas.filter(item => {
     if (type === 'pengumuman') {
       return item.type === 'pengumuman';
     }
-    // Untuk halaman berita, hanya tampilkan yang type 'berita' atau undefined/null
     return item.type === 'berita' || !item.type;
   });
 
@@ -33,9 +30,7 @@ export default function BeritaClientDisplay({
     setVisibleCount(prev => Math.min(filteredBeritas.length, prev + ITEMS_PER_PAGE));
   };
 
-  // ✅ Dynamic title & icon
   const pageTitle = type === 'pengumuman' ? 'Pengumuman Terbaru' : 'Berita Terbaru';
-  const PageIcon = type === 'pengumuman' ? FaEnvelope : FaPhoneAlt;
   const emptyMessage = type === 'pengumuman' 
     ? 'Belum ada pengumuman yang dipublikasikan.'
     : 'Belum ada berita yang dipublikasikan.';
@@ -47,8 +42,7 @@ export default function BeritaClientDisplay({
           {...slideInLeft}
           className="container max-w-7xl mx-auto px-4 pt-2 md:pt-20 pb-12 relative z-10"
         >
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <PageIcon className={`w-8 h-8 ${type === 'pengumuman' ? 'text-red-600' : 'text-blue-600'}`} />
+          <div className="flex items-center justify-center mb-8">
             <h1 className="text-3xl font-bold text-center">{pageTitle}</h1>
           </div>
           <div className="text-center py-12">
@@ -68,21 +62,9 @@ export default function BeritaClientDisplay({
         transition={{ duration: 0.5, delayChildren: 0.2 }}
         className="container max-w-7xl mx-auto px-4 pt-2 md:pt-20 pb-12 relative z-10"
       >
-        {/* ✅ Dynamic Header dengan Icon */}
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <PageIcon className={`w-8 h-8 ${type === 'pengumuman' ? 'text-red-600' : 'text-blue-600'}`} />
+        <div className="flex items-center justify-center mb-8">
           <h1 className="text-3xl font-bold text-center">{pageTitle}</h1>
         </div>
-
-        {/* ✅ Optional badge untuk pengumuman */}
-        {type === 'pengumuman' && (
-          <div className="flex justify-center mb-6">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-medium">
-              <FaEnvelope className="w-4 h-4" />
-              Informasi Penting
-            </span>
-          </div>
-        )}
 
         <motion.div
           variants={staggerContainer}
@@ -97,14 +79,11 @@ export default function BeritaClientDisplay({
           ))}
         </motion.div>
 
-        {/* Load More Button */}
         {visibleCount < filteredBeritas.length && (
           <div className="flex justify-center mt-12">
             <button
               onClick={loadMore}
-              className={`px-6 py-3 rounded-lg hover:opacity-90 transition-opacity text-white ${
-                type === 'pengumuman' ? 'bg-red-600' : 'bg-primary'
-              }`}
+              className="px-6 py-3 rounded-lg hover:opacity-90 transition-opacity text-white bg-primary"
             >
               Muat Lebih Banyak ({filteredBeritas.length - visibleCount} tersisa)
             </button>

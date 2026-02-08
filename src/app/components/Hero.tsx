@@ -33,7 +33,7 @@ const HeroClient = ({ initialBeritas }: HeroClientProps) => {
         transition={{ duration: 0.5, delayChildren: 0.2 }}
         className="container max-w-7xl mx-auto px-4 pt-2 md:pt-16 pb-12 relative z-10"
       >
-        <h1 className="text-3xl font-bold mb-8 text-center">Berita Terbaru</h1>
+        <h1 className="text-3xl font-bold mb-8 text-center">Informasi Terbaru</h1>
         
         {beritaList.length === 0 ? (
           <div className="text-center py-8">

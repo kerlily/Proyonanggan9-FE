@@ -16,6 +16,7 @@ import Image from "next/image";
 const MENU_ITEMS = [
   { name: "Beranda", href: "/" },
   { name: "Berita", href: "/berita" },
+  { name: "Pengumuman", href: "/pengumuman" },
   { name: "Profile", href: "/profile" },
   { name: "Gallery", href: "/gallery" },
   { name: "Contact", href: "/contact" },

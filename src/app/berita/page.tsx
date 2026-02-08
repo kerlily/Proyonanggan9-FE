@@ -1,7 +1,4 @@
 // src/app/berita/page.tsx
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-
 import { Metadata } from 'next'
 import { fetchBeritas, transformBeritaForComponent } from '@/lib/api'
 import BeritaClientDisplay from './BeritaClient'
@@ -14,6 +11,7 @@ export const metadata: Metadata = {
   }
 }
 
+// ✅ SSR dengan no-store untuk selalu fresh
 export default async function BeritaPage() {
   const beritas = await fetchBeritas();
   const transformedBeritas = beritas.map(transformBeritaForComponent);

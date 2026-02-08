@@ -112,10 +112,11 @@ export async function fetchGurus(): Promise<Guru[]> {
 }
 
 
+// Update semua fetch functions
 export async function fetchBeritas(): Promise<Berita[]> {
   const { data, error } = await apiFetch<{ beritas: Berita[] }>(
     'beritas',
-    { revalidate: 1800 } // 30 menit
+    { revalidate: 0 } // ✅ No cache
   );
   
   if (error || !data.beritas) {
@@ -135,7 +136,7 @@ export async function fetchBeritas(): Promise<Berita[]> {
 export async function fetchPengumuman(): Promise<Berita[]> {
   const { data, error } = await apiFetch<{ pengumuman: Berita[] }>(
     'pengumuman',
-    { revalidate: 1800 }
+    { revalidate: 0 } // ✅ No cache
   );
   
   if (error || !data.pengumuman) {

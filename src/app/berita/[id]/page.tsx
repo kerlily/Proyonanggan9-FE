@@ -1,30 +1,14 @@
-import { fetchBeritaById, fetchBeritas, formatDate } from "@/lib/api";
+// src/app/berita/[id]/page.tsx
+import { fetchBeritaById, formatDate } from "@/lib/api";
 import Image from "next/image";
 import { Metadata } from "next";
 import Link from "next/link";
-
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-export const dynamicParams = true
-
-// Generate static params untuk 50 berita terbaru
-export async function generateStaticParams() {
-  try {
-    const beritas = await fetchBeritas();
-    
-    return beritas.slice(0, 50).map((berita) => ({
-      id: berita.id.toString(),
-    }));
-  } catch (error) {
-    console.error('Error generating static params:', error);
-    return [];
-  }
-}
 
 type Props = {
   params: Promise<{ id: string }>
 }
 
+// ✅ Dynamic metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const id = resolvedParams.id;
@@ -58,6 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// ✅ SSR - no generateStaticParams
 export default async function BeritaDetail({ params }: Props) {
   const resolvedParams = await params;
   const id = resolvedParams.id;

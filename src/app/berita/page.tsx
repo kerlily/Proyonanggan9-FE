@@ -1,6 +1,6 @@
 // src/app/berita/page.tsx
-export const dynamic = 'force-static'
-export const revalidate = 1800 // 30 menit
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 import { Metadata } from 'next'
 import { fetchBeritas, transformBeritaForComponent } from '@/lib/api'

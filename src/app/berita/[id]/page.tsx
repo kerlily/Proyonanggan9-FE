@@ -3,8 +3,8 @@ import Image from "next/image";
 import { Metadata } from "next";
 import Link from "next/link";
 
-export const dynamic = 'force-static'
-export const revalidate = 3600 // 1 jam
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 export const dynamicParams = true
 
 // Generate static params untuk 50 berita terbaru

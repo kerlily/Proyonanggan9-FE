@@ -100,7 +100,19 @@ export default async function BeritaDetail({ params }: Props) {
           
           <time className="text-gray-500 dark:text-gray-400 mb-4 block">
             {formatDate(berita.published_at)}
+            
           </time>
+          {berita.has_attachment && berita.attachment_url && (
+            <a
+              href={berita.attachment_url}
+              target="_blank"
+              rel="noreferrer"
+              download={berita.attachment_name ?? true}
+              className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg text-sm font-medium transition-colors"
+            >
+              📎 {berita.attachment_name ?? 'Unduh Lampiran'}
+            </a>
+          )}
         </header>
         
         <div className="prose prose-lg dark:prose-invert max-w-none">

@@ -19,6 +19,9 @@ export interface Berita {
   published_at: string | null;
   created_by: string;
   image_url: string;
+  has_attachment: boolean;
+  attachment_name: string | null;
+  attachment_url: string | null;
 }
 
 export interface Gallery {

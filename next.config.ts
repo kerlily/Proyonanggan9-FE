@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'api.sdnproyonanggan9.my.id',
+        hostname: 'proyonanggan.my.id',
         pathname: '/storage/**',
       },
     ],

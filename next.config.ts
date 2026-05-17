@@ -94,7 +94,7 @@ const nextConfig: NextConfig = {
             value: '.*\\.vercel\\.app',
           },
         ],
-        destination: 'https://api.sdnproyonanggan9.my.id//:path*',
+        destination: 'https://api.sdnproyonanggan9.my.id/:path*',
         permanent: true, // 301 redirect
       },
     ];
